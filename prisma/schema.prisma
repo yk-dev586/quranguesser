@@ -1,0 +1,166 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ── Auth.js / NextAuth required models ───────────────────────────────────────
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  elo                  Float     @default(1000)
+  gamesPlayed          Int       @default(0)
+  mwcCorrect           Int       @default(0)
+  showOnLeaderboard    Boolean   @default(false)
+  lvGames       Int       @default(0)
+  lvCorrect     Int       @default(0)
+  nvGames       Int       @default(0)
+  nvCorrect     Int       @default(0)
+  tqGames       Int       @default(0)
+  tqCorrect     Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts              Account[]
+  sessions              Session[]
+  dailyAttempts         DailyAttempt[]
+  dailyChallengeResults DailyChallengeResult[]
+  quizSessions          QuizSession[]
+  gameEvents            GameEvent[]
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ── App models ────────────────────────────────────────────────────────────────
+
+model DailyAttempt {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  date      String   // UTC date YYYY-MM-DD
+  count     Int      @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+}
+
+model PageElo {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  pageNumber      Int      @unique
+  elo             Float    @default(1000)
+  totalAttempts   Int      @default(0)
+  correctAttempts Int      @default(0)
+  updatedAt       DateTime @updatedAt
+}
+
+model DailyChallenge {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  date      String   @unique // YYYY-MM-DD UTC
+  verseKeys String[] // exactly 5 verse keys
+  createdAt DateTime @default(now())
+
+  results DailyChallengeResult[]
+}
+
+model DailyChallengeResult {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  challengeId String    @db.ObjectId
+  userId      String    @db.ObjectId
+  scores      Int[]     // server-computed score per question (grows 0→5)
+  totalScore  Int       @default(0)
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+
+  challenge DailyChallenge @relation(fields: [challengeId], references: [id])
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([challengeId, userId])
+}
+
+model QuizSession {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  token             String   @unique
+  userId            String?  @db.ObjectId
+  gameMode          String
+  status            String   @default("active")
+  questionNumber    Int      @default(1)
+  totalScore        Int      @default(0)
+  currentQuestion   Json
+  timerLimit        Int      @default(90)
+  questionStartedAt DateTime
+  submitResult      Json?
+  expiresAt         DateTime
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+// Announcements displayed as a notice modal on the front page.
+// Each record is shown once per browser (read state tracked in localStorage by id).
+model Announcement {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  body      String
+  type      String   @default("info") // "info" | "warning" | "hotfix" | "feature"
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Records every game attempt — authenticated or anonymous, ranked or casual.
+// Useful for aggregate analytics and per-user activity history.
+model GameEvent {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String?  @db.ObjectId // null = anonymous guest
+  gameMode  String   // "missing-word-count" | "locate-verse" | "next-verse"
+  practice  Boolean  @default(false)
+  correct   Boolean
+  score     Int      @default(0) // for locate-verse, max 5000
+  ranked    Boolean  @default(false) // true only for ELO-affecting MWC games
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}

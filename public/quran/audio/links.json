@@ -1,0 +1,84 @@
+{
+  "version": 2,
+  "provider": "Al Quran Cloud CDN",
+  "reciters": [
+    {
+      "name": "مشاري راشد العفاسي",
+      "edition": "ar.alafasy",
+      "localTemplate": "audio/ar.alafasy/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/{chapter}.mp3"
+    },
+    {
+      "name": "محمود خليل الحصري",
+      "edition": "ar.husary",
+      "localTemplate": "audio/ar.husary/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.husary/{chapter}.mp3"
+    },
+    {
+      "name": "محمد صديق المنشاوي",
+      "edition": "ar.minshawi",
+      "localTemplate": "audio/ar.minshawi/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.minshawi/{chapter}.mp3"
+    },
+    {
+      "name": "محمد صديق المنشاوي — مجود",
+      "edition": "ar.minshawimujawwad",
+      "localTemplate": "audio/ar.minshawimujawwad/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.minshawimujawwad/{chapter}.mp3"
+    },
+    {
+      "name": "عبدالرحمن السديس",
+      "edition": "ar.sudais",
+      "localTemplate": "audio/ar.sudais/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.sudais/{chapter}.mp3"
+    },
+    {
+      "name": "سعود الشريم",
+      "edition": "ar.shuraim",
+      "localTemplate": "audio/ar.shuraim/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.shuraim/{chapter}.mp3"
+    },
+    {
+      "name": "عبدالباسط عبدالصمد",
+      "edition": "ar.abdulbasit",
+      "localTemplate": "audio/ar.abdulbasit/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.abdulbasit/{chapter}.mp3"
+    },
+    {
+      "name": "عبدالباسط عبدالصمد — مجود",
+      "edition": "ar.abdulbasitmujawwad",
+      "localTemplate": "audio/ar.abdulbasitmujawwad/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.abdulbasitmujawwad/{chapter}.mp3"
+    },
+    {
+      "name": "أحمد بن علي العجمي",
+      "edition": "ar.ajamy",
+      "localTemplate": "audio/ar.ajamy/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.ajamy/{chapter}.mp3"
+    },
+    {
+      "name": "محمد أيوب",
+      "edition": "ar.muhammadayoub",
+      "localTemplate": "audio/ar.muhammadayoub/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.muhammadayoub/{chapter}.mp3"
+    },
+    {
+      "name": "علي الحذيفي",
+      "edition": "ar.hudhaify",
+      "localTemplate": "audio/ar.hudhaify/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.hudhaify/{chapter}.mp3"
+    },
+    {
+      "name": "محمد جبريل",
+      "edition": "ar.muhammadjibreel",
+      "localTemplate": "audio/ar.muhammadjibreel/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.muhammadjibreel/{chapter}.mp3"
+    },
+    {
+      "name": "محمود خليل الحصري — معلم",
+      "edition": "ar.parhizgar",
+      "localTemplate": "audio/ar.parhizgar/{chapter3}.mp3",
+      "template": "https://cdn.islamic.network/quran/audio-surah/128/ar.parhizgar/{chapter}.mp3"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Amiri Quran font
+Copyright 2010-2022 Khaled Hosny
+Licensed under the SIL Open Font License, Version 1.1.
+This file is bundled as a local fallback Quran font.

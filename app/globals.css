@@ -1,0 +1,304 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'QuranLocal';
+  src: url('/quran/fonts/AmiriQuran.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('/quran/fonts/AmiriQuran.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ProgramLocal';
+  src: url('/quran/fonts/myfont.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ── Airbnb-inspired design tokens ── */
+:root {
+  /* ── Canvas / Background ── */
+  --color-background: #ffffff;
+  --color-on-background: #222222;
+
+  /* ── Surface hierarchy ── */
+  --color-surface: #f7f7f7;
+  --color-surface-dim: #f2f2f2;
+  --color-surface-bright: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7f7f7;
+  --color-surface-container: #f2f2f2;
+  --color-surface-container-high: #ebebeb;
+  --color-surface-container-highest: #dddddd;
+  --color-surface-variant: #f7f7f7;
+  --color-surface-tint: #ff385c;
+
+  /* ── Text ── */
+  --color-on-surface: #222222; /* ink */
+  --color-on-surface-variant: #6a6a6a; /* muted */
+  --color-inverse-surface: #222222;
+  --color-inverse-on-surface: #ffffff;
+
+  /* ── Outline / Hairline ── */
+  --color-outline: #dddddd; /* hairline */
+  --color-outline-variant: #ebebeb; /* hairline-soft */
+
+  /* ── Primary — Rausch ── */
+  --color-primary: #ff385c;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #ffd1da; /* Rausch pale tint / disabled */
+  --color-on-primary-container: #e00b41; /* Rausch active / press state */
+  --color-inverse-primary: #ff385c;
+
+  /* ── Secondary ── */
+  --color-secondary: #222222;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #f7f7f7;
+  --color-on-secondary-container: #222222;
+
+  /* ── Tertiary / Muted ── */
+  --color-tertiary: #6a6a6a;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #f7f7f7;
+  --color-on-tertiary-container: #3f3f3f;
+
+  /* ── Error ── */
+  --color-error: #c13515;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffeee8;
+  --color-on-error-container: #c13515;
+
+  /* ── Scrim / Overlay ── */
+  --color-scrim: rgba(0, 0, 0, 0.5);
+  --color-bottom-nav-bg: rgba(255, 255, 255, 0.85);
+  --color-bottom-nav-border: rgba(0, 0, 0, 0.08);
+}
+
+/* ── Dark-mode tokens ── */
+.dark {
+  --color-background: #121212;
+  --color-on-background: #e3e3e3;
+
+  --color-surface: #1e1e1e;
+  --color-surface-dim: #1a1a1a;
+  --color-surface-bright: #2a2a2a;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1e1e1e;
+  --color-surface-container: #252525;
+  --color-surface-container-high: #2e2e2e;
+  --color-surface-container-highest: #383838;
+  --color-surface-variant: #1e1e1e;
+  --color-surface-tint: #ff6b85;
+
+  --color-on-surface: #e3e3e3;
+  --color-on-surface-variant: #a0a0a0;
+  --color-inverse-surface: #e3e3e3;
+  --color-inverse-on-surface: #1e1e1e;
+
+  --color-outline: #3a3a3a;
+  --color-outline-variant: #2e2e2e;
+
+  --color-primary: #ff6b85;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #5c1028;
+  --color-on-primary-container: #ff8fa3;
+  --color-inverse-primary: #ff385c;
+
+  --color-secondary: #e3e3e3;
+  --color-on-secondary: #1e1e1e;
+  --color-secondary-container: #2a2a2a;
+  --color-on-secondary-container: #e3e3e3;
+
+  --color-tertiary: #a0a0a0;
+  --color-on-tertiary: #1e1e1e;
+  --color-tertiary-container: #2a2a2a;
+  --color-on-tertiary-container: #c8c8c8;
+
+  --color-error: #ff6b6b;
+  --color-on-error: #1e1e1e;
+  --color-error-container: #3d1515;
+  --color-on-error-container: #ff8a8a;
+
+  --color-scrim: rgba(0, 0, 0, 0.7);
+  --color-bottom-nav-bg: rgba(18, 18, 18, 0.85);
+  --color-bottom-nav-border: rgba(255, 255, 255, 0.08);
+}
+
+@theme inline {
+  --font-sans:
+    ProgramLocal, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-geist-mono);
+
+  /* Surface colors */
+  --color-surface: var(--color-surface);
+  --color-surface-dim: var(--color-surface-dim);
+  --color-surface-bright: var(--color-surface-bright);
+  --color-surface-container-lowest: var(--color-surface-container-lowest);
+  --color-surface-container-low: var(--color-surface-container-low);
+  --color-surface-container: var(--color-surface-container);
+  --color-surface-container-high: var(--color-surface-container-high);
+  --color-surface-container-highest: var(--color-surface-container-highest);
+  --color-surface-variant: var(--color-surface-variant);
+  --color-surface-tint: var(--color-surface-tint);
+
+  /* Text colors */
+  --color-on-surface: var(--color-on-surface);
+  --color-on-surface-variant: var(--color-on-surface-variant);
+  --color-inverse-surface: var(--color-inverse-surface);
+  --color-inverse-on-surface: var(--color-inverse-on-surface);
+
+  /* Outline */
+  --color-outline: var(--color-outline);
+  --color-outline-variant: var(--color-outline-variant);
+
+  /* Primary */
+  --color-primary: var(--color-primary);
+  --color-on-primary: var(--color-on-primary);
+  --color-primary-container: var(--color-primary-container);
+  --color-on-primary-container: var(--color-on-primary-container);
+  --color-inverse-primary: var(--color-inverse-primary);
+
+  /* Secondary */
+  --color-secondary: var(--color-secondary);
+  --color-on-secondary: var(--color-on-secondary);
+  --color-secondary-container: var(--color-secondary-container);
+  --color-on-secondary-container: var(--color-on-secondary-container);
+
+  /* Tertiary */
+  --color-tertiary: var(--color-tertiary);
+  --color-on-tertiary: var(--color-on-tertiary);
+  --color-tertiary-container: var(--color-tertiary-container);
+  --color-on-tertiary-container: var(--color-on-tertiary-container);
+
+  /* Error */
+  --color-error: var(--color-error);
+  --color-on-error: var(--color-on-error);
+  --color-error-container: var(--color-error-container);
+  --color-on-error-container: var(--color-on-error-container);
+
+  /* Scrim / Overlay */
+  --color-scrim: var(--color-scrim);
+  --color-bottom-nav-bg: var(--color-bottom-nav-bg);
+  --color-bottom-nav-border: var(--color-bottom-nav-border);
+
+  /* Background */
+  --color-background: var(--color-background);
+  --color-on-background: var(--color-on-background);
+
+  /* Spacing — 4px base, section = 64px */
+  --spacing-xxs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-base: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-section: 64px;
+  --spacing-gutter: 16px;
+  --spacing-margin: 24px;
+
+  /* Border radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px; /* buttons */
+  --radius-md: 14px; /* cards */
+  --radius-lg: 24px;
+  --radius-xl: 32px; /* category strip */
+  --radius-full: 9999px;
+  --radius-pill: 9999px;
+}
+
+/* ── Card hover shadow (single Airbnb elevation tier) ── */
+.card-shadow {
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+.card-shadow:hover {
+  box-shadow:
+    rgba(0, 0, 0, 0.02) 0 0 0 1px,
+    rgba(0, 0, 0, 0.04) 0 2px 6px 0,
+    rgba(0, 0, 0, 0.1) 0 4px 8px 0;
+}
+
+/* ── Game card — white utility card ── */
+.game-card {
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-outline);
+  border-radius: 14px;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+.game-card:hover {
+  box-shadow:
+    rgba(0, 0, 0, 0.02) 0 0 0 1px,
+    rgba(0, 0, 0, 0.04) 0 2px 6px 0,
+    rgba(0, 0, 0, 0.1) 0 4px 8px 0;
+}
+
+/* ── Quiz card image zoom overlay ── */
+button:hover > .image-zoom-overlay {
+  background: rgba(0, 0, 0, 0.28) !important;
+}
+button:hover .image-zoom-icon {
+  opacity: 1 !important;
+}
+
+/* ── Glass panel — now a clean white card (no blur for Airbnb) ── */
+.glass-panel {
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-outline);
+  border-radius: 14px;
+}
+
+/* ── Deprecated Apple tile utilities (kept for safety) ── */
+.tile-light {
+  background-color: var(--color-surface-container-lowest);
+  color: var(--color-on-surface);
+}
+.tile-dark {
+  background-color: var(--color-surface-container-low);
+  color: var(--color-on-surface);
+} /* inverted to light */
+.tile-parchment {
+  background-color: var(--color-surface-container-low);
+  color: var(--color-on-surface);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family:
+    ProgramLocal,
+    system-ui,
+    -apple-system,
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.quran-text {
+  font-family: var(--font-scheherazade), 'Traditional Arabic', serif;
+  font-size: 28px;
+  line-height: 2;
+  direction: rtl;
+  text-align: right;
+  letter-spacing: 0;
+}
+
+.quran-local-text { font-family: 'QuranLocal', 'Amiri Quran', serif; }
+.quran-text { font-family: 'QuranLocal', 'Amiri Quran', serif; }

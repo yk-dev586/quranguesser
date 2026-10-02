@@ -1,0 +1,23 @@
+{
+  "customSyntax": "postcss-scss",
+  "plugins": ["stylelint-scss", "stylelint-prettier"],
+  "rules": {
+    "prettier/prettier": true,
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "theme",
+          "tailwind",
+          "layer",
+          "apply",
+          "config",
+          "source",
+          "utility",
+          "variant"
+        ]
+      }
+    ]
+  }
+}
